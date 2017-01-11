@@ -46,7 +46,6 @@ Provide the preview view in `app_name.admin`:
     . var/virtualenv/bin/activate.fish
     pip install -r requirements.txt
     createdb witlof
-    cd witlof/settings/ ; ln -s develop.py __init__.py ; cd -
     ./manage.py migrate
     ./manage.py loaddata var/fixtures/auth.json
     bower install
