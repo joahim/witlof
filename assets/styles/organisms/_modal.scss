@@ -1,0 +1,25 @@
+.modal {
+  .modal-footer {
+    text-align: center;
+  }
+
+  .modal-body {
+    .node-list {
+      margin-left: 1.4rem;
+      padding: 0;
+    }
+
+    .node {
+      list-style: none;
+
+      .btn {
+        padding: 0;
+        outline: none;
+      }
+
+      > span {
+        padding: 0 0 0 0.5rem;
+      }
+    }
+  }
+}

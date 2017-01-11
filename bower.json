@@ -1,0 +1,25 @@
+{
+  "name": "witlof",
+  "homepage": "https://github.com/joahim/witlof",
+  "authors": [
+    "Joh Dokler <joh.dokler@gmail.com>"
+  ],
+  "description": "Witlof - a Django CMS",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "bootstrap": "https://github.com/twbs/bootstrap.git#v4.0.0-alpha.2",
+    "font-awesome": "~4.4.0",
+    "jquery": "^3.1.1",
+    "froala-wysiwyg-editor": "^2.3.4"
+  }
+}

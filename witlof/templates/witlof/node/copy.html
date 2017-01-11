@@ -1,0 +1,62 @@
+{% extends 'witlof/__base__.html' %}
+
+{% block title %}Copy document {{ node.title }}{% endblock title %}
+
+{% block content %}
+
+<h1>Copy document <i>{{ node.title }}</i> to:</h1>
+
+<form id="copy" method="post" action="{% url 'witlof:copy_node' node.id %}">
+    {% csrf_token %}
+    <input type="hidden" name="node_id" value="{{ node.id }}">
+    <ul class="node-tree">
+        <li id="{{ root.id }}">
+            {% if root_is_target %}<input name="target_node_id" value="{{ root.id }}" type="radio" />{% endif %} {{ root.title }}
+            <ul class="node-tree">
+            {% include 'witlof/node/copy-move-children.html' %}
+            </ul>
+        </li>
+    </ul>
+    <input id="submit" type="submit" value="Copy document" disabled="true"> or
+    <a href="{% url 'witlof:node' node.id %}" class="action">Cancel</a>
+</form>
+
+{% endblock content %}
+
+{% block scripts %}
+{{ block.super }}
+<script>
+$(document).ready(function ()
+{
+    var activate_subtree = function ()
+    {
+        var link = $(this);
+        var node = link.parent('li');
+        if (link.hasClass('closed')) {
+            link.removeClass('closed');
+            node.append('<span class="loading">loading...</span> <ul class="node-tree"></ul>');
+            var list = $('ul', node);
+            list.hide();
+            list.load('{% url 'witlof:copy_move_node_children' node.id %}', { csrfmiddlewaretoken: '{{ csrf_token }}', target_id: node.attr('id') }, function () {
+                $('.loading', node).remove();
+                $('.closed', node).click(activate_subtree);
+                $('input', list).click(function () { $('form#copy input#submit').removeAttr("disabled"); });
+                list.slideDown('normal');
+                link.addClass('open');
+            });
+        } else {
+            link.removeClass('open');
+            if ($('input[type=radio][checked=true]', node).length) {
+                $('form#copy input#submit').attr("disabled", true);
+            }
+            $('ul', node).slideUp('normal', function () { $('ul', node).remove(); });
+            link.addClass('closed');
+        }        
+        return false;
+    };
+
+    $('.node-tree .closed').click(activate_subtree);
+    $('form#copy :radio').click(function () { $('form#copy input#submit').removeAttr("disabled"); });
+});
+</script>
+{% endblock %}

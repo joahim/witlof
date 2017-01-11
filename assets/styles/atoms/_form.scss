@@ -1,0 +1,30 @@
+.dropzone {
+  border: 2px dotted $gray-light;
+  border-radius: $border-radius;
+  line-height: 96px;
+  width: 100px;
+  text-align: center;
+  font-size: 24px;
+  color: $gray-light;
+  background-color: white;
+  display: inline-block;
+  cursor: pointer;
+
+  &.dropzone-active {
+    background-color: $gray-lighter;
+    border-style: solid;
+  }
+}
+
+.form-control-label {
+  padding-left: $grid-gutter-width / 2;
+}
+
+.or-cancel {
+  color: $text-muted;
+  margin-left: 1.2rem;
+}
+
+.action-separator {
+  padding: 0 0.6rem;
+}

@@ -1,0 +1,20 @@
+.breadcrumb {
+  background-color: inherit;
+  padding: 0.25rem 1rem;
+  margin-bottom: 1.5rem;
+
+  li {
+    margin-bottom: 0.5rem;
+  }
+
+  li + li {
+    &:before {
+      content: '→ ';
+    }
+  }
+
+  .active {
+    border: solid 4px $gray-lighter;
+    padding: 0.25rem;
+  }
+}

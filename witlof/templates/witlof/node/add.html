@@ -1,0 +1,41 @@
+{% extends 'witlof/__base__.html' %}
+
+{% block title %}Add document{% endblock title %}
+
+{% block content %}
+
+<h1>Add a new document</h1>
+
+<form method="post">
+
+    <div class="row">
+        <div class="form col-md-6">
+
+            {% csrf_token %}
+
+            <div class="field form-group">
+                <label>Title:</label>
+                <div class="input">
+                    {{ form.title  }}
+                    {% if form.title.errors %}<span class="errors">{{ form.title.errors|join:" " }}</span>{% endif %}
+                </div>
+            </div>
+
+            <div class="field form-group">
+                <label>Path name:</label>
+                <div class="input">
+                    {{ form.slug  }}
+                    {% if form.slug.errors %}<span class="errors">{{ form.title.errors|join:" " }}</span>{% endif %}
+                </div>
+            </div>
+
+            <div class="submit">
+                <input type="submit" class="btn btn-primary" value="Add a new document"> <span class="action-separator">or</span> <a class="action" href="{% url 'witlof:node' node.id %}">Cancel</a></td>
+            </div>
+
+        </div>
+    </div>
+
+</form>
+
+{% endblock content %}

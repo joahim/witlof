@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+
+{% load staticfiles %}
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{{ site_name }} / CMS / {{ node.title }} / Revision {{ document.revision }} / Preview</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'witlof/styles/preview.css' %}">
+</head>
+
+<body>
+    <header>
+        <div class="actions"><a href="{% if referer %}{{ referer }}{% else %}{% url 'witlof:node' node.id %}{% endif %}">Close preview</a></div>
+        <span class="title">{{ node.title }}</span> / Revision {{ document.revision }}
+    </header>
+
+    <iframe class="preview" src="{% url 'witlof:preview_document_content_frame' document.id %}"></iframe>
+</body>
+
+</html>

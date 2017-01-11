@@ -1,0 +1,12 @@
+.page-actions {
+  @extend .box;
+  margin-bottom: 1rem;
+
+  .label {
+    padding: 0;
+    padding-right: 0.3rem;
+    font-size: $font-size-base;
+    color: $body-color;
+    font-weight: normal;
+  }
+}

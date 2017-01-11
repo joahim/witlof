@@ -1,0 +1,44 @@
+{% extends 'witlof/__base__.html' %}
+
+{% load staticfiles %}
+
+{% block title %}{{ node.title }} / Revision {{ document.revision }} / Preview{% endblock title %}
+
+{% block actions %}
+<div class="page-actions">
+    <span class="label">Revision:</span>
+    <ul class="actions">
+        <li class="action"><a href="{% url 'witlof:document' document.id %}">Edit</a></li>
+    </ul>
+</div>
+{% endblock actions %}
+
+{% block content %}
+<h1>Preview</h1>
+
+<p>Preview for this document template is not available. Please enable it via <code>admin.py</code> in your site app.</p>
+
+<p>To enable preview for all document templates:</p>
+
+<pre>
+    from . import views
+
+    class Meta:
+        preview = views.preview
+</pre>
+
+<p>To enable preview for specific document templates:</p>
+
+<pre>
+    from . import views
+
+    classs MyTemplateAdmin:
+        class Meta:
+            preview = views.my_template_preview
+</pre>
+{% endblock content %}
+
+{% block styles %}
+{{ block.super }}
+<link rel="stylesheet" media="screen" type="text/css" href="{% static 'cms/css/preview.css' %}" />
+{% endblock %}

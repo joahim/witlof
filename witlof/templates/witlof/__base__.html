@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+{% load staticfiles %}
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>{{ site_name }} / CMS / {% block title %}{% endblock title %}</title>
+        <link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" type="text/css" href="{% static 'witlof/styles/main.css' %}">
+    </head>
+
+    <body>
+        {% block body %}
+
+        <nav class="navbar navbar-dark bg-inverse">
+            <div class="container">
+                <a class="navbar-brand" href="{% url 'witlof:home' %}">{{ site_name }}</a>
+                {% if not user.is_anonymous %}
+                <div class="user-info">
+                    {{ user.get_full_name|default:user.username }} |
+                    <a class="nav-link" href="{% url 'witlof:logout' %}">Log out</a>
+                </div>
+                {% endif %}
+            </div>
+        </nav>
+
+        <div class="container">
+
+            {% block path %}
+            {% if node.ancestors %}
+            <ol class="breadcrumb">
+                <li><a href="{% url 'witlof:home' %}">CMS</a></li>
+                {% for n in node.ancestors %}
+                {% if not forloop.last %}
+                <li><a href="{% url 'witlof:node' n.id %}">{{ n.title|truncatewords:4 }}</a></li>
+                {% else %}
+                <li>{% if node_action %}<a class="active" href="{% url 'witlof:node' n.id %}">{{ n.title|truncatewords:4 }}</a>{% else %}<span class="active">{{ n.title|truncatewords:4 }}</span>{% endif %}</li>
+                {% endif %}
+                {% endfor %}
+                {% if node_action %}
+                <li>{{ node_action }}</li>
+                {% endif %}
+            </ol>
+            {% endif %}
+            {% endblock path %}
+
+            <!-- {% if messages %}
+            <div id="messages">
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %} -->
+
+            {% block actions %}{% endblock %}
+            <div class="page-content">
+                {% block content %}{% endblock content %}
+            </div>
+        </div>
+        {% endblock %}
+
+        {% block scripts %}
+        <script src="{% static 'witlof/scripts/jquery.min.js' %}"></script>
+
+        <script src="{% static 'witlof/bootstrap/scripts/util.js' %}"></script>
+        <script src="{% static 'witlof/bootstrap/scripts/modal.js' %}"></script>
+
+        <script src="{% static 'witlof/scripts/vendor.js' %}"></script>
+        {% endblock scripts %}
+    </body>
+
+</html>

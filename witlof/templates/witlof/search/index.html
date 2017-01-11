@@ -1,0 +1,64 @@
+{% extends 'witlof/__base__.html' %}
+
+{% block title %}Search{% endblock title %}
+
+{% block path %}
+<ol class="breadcrumb">
+    <li><a href="{% url 'witlof:home' %}">CMS</a></li>
+    <li><span class="active">Search</span></li>
+</ol>
+{% endblock %}
+
+{% block content %}
+
+{% include 'witlof/search/__form__.html'%}
+
+{% if query %}
+
+<div class="search-results">
+
+{% if results %}
+
+{% for document in results.documents %}
+{% endfor %}
+
+{% for result in results %}
+    <div class="search-result">
+        <div class="node">
+            <div class="title">
+                <a href="{% url 'witlof:node' result.node.id %}">{{ result.node.title|safe }}</a>
+            </div>
+            <div class="path">
+                {{ result.node.path }}
+            </div>
+            {% if result.documents %}
+            <ul class="document-list">
+            {% for d in result.documents %}
+                <li>
+                    {% if d.deleted %}
+                    <span class="document-title-deleted">Revision {{ d.revision }}</span>
+                    <div class="document-info">Deleted on {{ d.updated|date:"D j. M Y \a\t H:i" }}</div>
+                    {% else %}
+                    <span class="document-title"><a href="{% url 'witlof:document' d.id %}">Revision {{ d.revision }}</a></span>
+                    <div class="document-info">
+                        Last updated on {{ d.updated|date:"D j. M Y \a\t H:i" }},
+                        created on {{ d.created|date:"D j. M Y" }}
+                    </div>
+                    {% endif %}
+                </li>
+            {% endfor %}
+            </ul>
+            {% endif%}
+        </div>
+    </div>
+{% endfor %}
+
+{% else %}
+<p>No documents matching this query were found.</p>
+{% endif %}
+
+</div>
+
+{% endif %}
+
+{% endblock content %}

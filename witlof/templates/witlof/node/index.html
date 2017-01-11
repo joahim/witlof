@@ -1,0 +1,29 @@
+{% extends 'witlof/__base__.html' %}
+
+{% load staticfiles %}
+
+{% block title %}{{ node.title }}{% endblock title %}
+
+{% block actions %}
+{% if node.id != 1 %}
+<div class="page-actions">
+    <span class="label">Document:</span>
+    <span id="node-actions-app"></span>
+</div>
+{% endif %}
+{% endblock actions %}
+
+{% block content %}
+<div id="node-app"></div>
+{% endblock content %}
+
+{% block scripts %}
+{{ block.super }}
+<script>
+    window.witlof = {
+        nodeId: {{ node.id }}
+    };
+</script>
+<script src="{% static 'witlof/scripts/node.js' %}"></script>
+<script src="{% static 'witlof/scripts/node-actions.js' %}"></script>
+{% endblock %}

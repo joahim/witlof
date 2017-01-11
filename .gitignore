@@ -1,0 +1,14 @@
+.DS_Store
+
+*.pyc
+
+*/settings/__init__.py
+
+/bower_components/
+/node_modules/
+
+/var/media/
+/var/static/
+/var/virtualenv/
+
+/witlof.egg-info

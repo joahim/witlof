@@ -1,0 +1,25 @@
+[
+{
+  "pk": 1,
+  "model": "witlof.node",
+  "fields": {
+    "menu_title": null,
+    "description": null,
+    "title": "Home",
+    "show_in_menu": false,
+    "is_subsite": false,
+    "position": 1,
+    "path": "",
+    "slug": ""
+  }
+},
+{
+  "pk": 1,
+  "model": "witlof.tree",
+  "fields": {
+    "node": 1,
+    "distance": 0,
+    "ancestor": 1
+  }
+}
+]

@@ -1,0 +1,20 @@
+{% for n, is_target in children %}
+    {% if is_target %}
+    <li id="{{ n.id }}">
+        <input name="target_node_id" value="{{ n.id }}" type="radio" />
+        {% if n.children %}
+        <span class="closed"><a href="#">{{ n.title }}</a></span>
+        {% else %}
+        {{ n.title }}
+        {% endif %}
+    </li>
+    {% else %}
+    <li id="{{ n.id }}">
+        {% if n.children %}
+        <span style="color: #999; margin-left: 1.9em" class="closed"><a href="#">{{ n.title }}</a></span>
+        {% else %}
+        <span style="color: #999; margin-left: 1.9em">{{ n.title }}</span>
+        {% endif %}
+    </li>
+    {% endif %}
+{% endfor %}

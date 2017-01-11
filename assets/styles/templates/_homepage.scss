@@ -1,0 +1,42 @@
+.home {
+
+  section {
+    @extend .box;
+    margin-bottom: 1rem;
+
+    h2 {
+      margin: 0.8rem 0 1rem 0;
+    }
+  }
+
+  .search {
+    @extend .clearfix;
+
+    form {
+      margin-top: 0.3rem;
+    }
+  }
+
+  .sitemap {
+  }
+
+  .recent-documents {
+
+    .recently-updated-documents {
+      .document-list {
+        list-style-type: none;
+        margin-left: 0;
+        padding-left: 0;
+
+        li {
+          margin-bottom: 0.8rem;
+
+          .info {
+            @extend .text-muted;
+            font-size: $font-size-sm;
+          }
+        }
+      }
+    }
+  }
+}

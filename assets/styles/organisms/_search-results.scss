@@ -1,0 +1,39 @@
+.search-results {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: solid 4px $gray-lighter;
+
+  .search-result {
+    margin-bottom: 1.5rem;
+
+    .node {
+      .title {
+        font-size: $font-size-lg;
+      }
+
+      .path {
+        @extend .text-muted;
+        font-size: $font-size-sm;
+      }
+
+      .document-list {
+        margin-top: 0.6rem;
+        list-style-type: none;
+
+        > li {
+          margin-bottom: 0.4rem;
+
+          .document-title-deleted, .document-title, .document-info {
+            display: inline-block;
+          }
+
+          .document-info {
+            @extend .text-muted;
+            font-size: $font-size-sm;
+            padding-left: 0.5rem;
+          }
+        }
+      }
+    }
+  }
+}

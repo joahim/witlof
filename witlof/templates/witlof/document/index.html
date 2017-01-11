@@ -1,0 +1,101 @@
+{% extends 'witlof/__base__.html' %}
+
+{% load staticfiles %}
+
+{% block title %}{{ node.title }} / Revision {{ document.revision }}{% endblock title %}
+
+{% block actions %}
+<div class="page-actions">
+    <form id="template-change-form" method="post">
+        <span class="label">Template:</span>
+        {% csrf_token %}
+        <select id="template-change" name="template" data-current="{{ document.template }}">
+            {% for name, verbose_name in templates %}
+            <option value="{{ name }}"{% if document.template == name %} selected="true"{% endif %}>{{ verbose_name }}</option>
+            {% endfor %}
+        </select>
+        <div class="modal fade" id="template-change-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">Confirmation</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to change the template?</p>
+                        <p>Your current changes will not be saved and you may loose current document data during the template change operation.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-danger" onCLick="$('#template-change-modal').modal('hide'); $('#template-change-form').submit();">Change template</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock actions %}
+
+{% block content %}
+<form class="document" method="POST">
+    {% csrf_token %}
+
+    <div id="document-app"></div>
+
+    <div class="submit">
+        <input type="submit" class="btn btn-primary" name="save" value="Save and Finish">
+        <input type="submit" class="btn btn-secondary" name="save-and-continue" value="Save and Continue">
+        <input type="submit" class="btn btn-secondary" name="save-and-preview" value="Save and Preview">
+        <span class="action-separator">or</span>
+        <a class="action action-inverse" href="{% url 'witlof:node' node.id %}">Cancel</a>
+    </div>
+</form>
+{% endblock %}
+
+{% block scripts %}
+{{ block.super }}
+
+<script>
+    window.witlof = {
+        nodeId: {{ document.node.id }},
+        documentId: {{ document.id }}
+    };
+
+    $('#template-change').on('change', function() {
+        $('#template-change-modal').modal();
+    });
+
+    $('#template-change-modal').on('hidden.bs.modal', function (e) {
+        $('#template-change').val($('#template-change')[0].dataset.current);
+    });
+
+</script>
+
+<script src="{% static 'witlof/scripts/froala/froala_editor.min.js' %}"></script>
+<script src="{% static 'witlof/scripts/froala/plugins/align.min.js' %}"></script>
+<script src="{% static 'witlof/scripts/froala/plugins/code_view.min.js' %}"></script>
+<script src="{% static 'witlof/scripts/froala/plugins/entities.min.js' %}"></script>
+<script src="{% static 'witlof/scripts/froala/plugins/image.min.js' %}"></script>
+<script src="{% static 'witlof/scripts/froala/plugins/image_manager.min.js' %}"></script>
+<script src="{% static 'witlof/scripts/froala/plugins/file.min.js' %}"></script>
+<script src="{% static 'witlof/scripts/froala/plugins/inline_style.min.js' %}"></script>
+<script src="{% static 'witlof/scripts/froala/plugins/line_breaker.min.js' %}"></script>
+<script src="{% static 'witlof/scripts/froala/plugins/link.min.js' %}"></script>
+<script src="{% static 'witlof/scripts/froala/plugins/lists.min.js' %}"></script>
+<script src="{% static 'witlof/scripts/froala/plugins/paragraph_format.min.js' %}"></script>
+<script src="{% static 'witlof/scripts/froala/plugins/paragraph_style.min.js' %}"></script>
+<script src="{% static 'witlof/scripts/froala/plugins/quote.min.js' %}"></script>
+<script src="{% static 'witlof/scripts/froala/plugins/table.min.js' %}"></script>
+<script src="{% static 'witlof/scripts/froala/plugins/url.min.js' %}"></script>
+<script src="{% static 'witlof/scripts/froala/plugins/video.min.js' %}"></script>
+
+{% if FROALA_ACTIVATION_KEY %}
+<script>
+    $.FroalaEditor.DEFAULTS.key = '{{ FROALA_ACTIVATION_KEY }}';
+</script>
+{% endif %}
+
+<script src="{% static 'witlof/scripts/document.js' %}"></script>
+{% endblock %}

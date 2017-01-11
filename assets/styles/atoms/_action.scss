@@ -1,0 +1,19 @@
+.action {
+  color: hotpink;
+  background: none;
+  border: none;
+
+  &:focus, &:active {
+    outline: none;
+  }
+
+  &.action-navigation {
+    color: $brand-primary;
+  }
+
+  &.action-inverse {
+    &:hover {
+      color: white;
+    }
+  }
+}

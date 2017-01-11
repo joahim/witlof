@@ -1,0 +1,50 @@
+{% extends 'witlof/__base__.html' %}
+
+{% block title %}Home{% endblock title %}
+
+{% block path %}{% endblock %}
+
+{% block content %}
+
+<div class="home">
+
+    <section class="search">
+        {% include 'witlof/search/__form__.html'%}
+    </section>
+
+    <section class="sitemap">
+        <h2>Sitemap</h2>
+
+        <ul class="sitemap-level-1">
+            <li><a href="{% url 'witlof:node' root.id %}">{{ root.title|safe }}</a></li>
+            <ul class="sitemap-level-2">
+                {% for node in root.children %}
+                <li>
+                    <a href="{% url 'witlof:node' node.id %}">{{ node.title|safe }}</a>
+                    <ul class="sitemap-level-3">
+                        {% for n in node.children %}
+                        <li><a href="{% url 'witlof:node' n.id %}">{{ n.title|safe }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                {% endfor %}
+            </ul>
+        </ul>
+    </section>
+
+    <section class="recent-documents">
+        <h2>Recently updated</h2>
+
+        <div class="recently-updated-documents">
+            <ul class="document-list">
+            {% for n in last_updated_nodes %}
+                <li>
+                    <a href="{% url 'witlof:node' n.id %}">{{ n.title|safe }}</a>
+                    <div class="info">Updated on {{ n.updated|date:"j. M Y \a\t H:i" }}</div>
+                </li>
+            {% endfor %}
+            </ul>
+        </div>
+    </section>
+</div>
+{% endblock content %}

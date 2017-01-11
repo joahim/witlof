@@ -1,0 +1,10 @@
+include README.md
+include witlof/fixtures/*.json
+recursive-include witlof/management *.py
+recursive-include witlof/migrations *.py
+recursive-include witlof/schema *.py
+recursive-include witlof/api *.py
+recursive-include witlof/search *
+recursive-include witlof/templatetags *.py
+recursive-include witlof/templates *
+recursive-include witlof/static *

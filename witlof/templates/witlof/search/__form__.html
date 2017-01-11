@@ -1,0 +1,10 @@
+<form class="search-form" method="get" action="{% url 'witlof:search' %}">
+  <div class="row">
+    <div class="col-md-6">
+      <input type="text" class="form-control" name="q" value="{{ query|default_if_none:"" }}" placeholder="Search for document ...">
+    </div>
+    <div class="col-md-1">
+      <input type="submit" class="btn btn-primary" value="Search">
+    </div>
+  </div>
+</form>

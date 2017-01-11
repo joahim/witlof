@@ -1,0 +1,3 @@
+html{height:100%}body{margin:0;height:100%}header{top:0;position:fixed;box-sizing:border-box;width:100%;height:52px;font-family:Verdana;font-size:9pt;padding:15px 20px;background-color:#ffffcc;border-bottom:solid 1px gray}header .title{font-size:11pt;font-weight:bold}header .actions{float:right;margin-left:10px}header .actions a:link,header .actions a:visited{font-size:9pt;color:red;padding:3px 4px 1px 3px}header .actions a:hover{color:white;background-color:red;text-decoration:none}.preview{display:block;margin-top:52px;width:100%;height:100%;border:0}
+
+/*# sourceMappingURL=preview.css.map */

@@ -1,0 +1,21 @@
+.login {
+
+  margin-left: auto;
+  margin-right: auto;
+
+  @extend .container;
+
+  table {
+    margin-top: 4rem;
+  }
+
+  td {
+    padding-bottom: 1rem;
+    padding-right: 0.5rem;
+  }
+
+  input[type="text"],
+  input[type="password"] {
+    @extend .form-control;
+  }
+}

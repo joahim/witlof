@@ -1,0 +1,96 @@
+#node-app {
+  .node-metadata {
+
+    padding: $grid-gutter-width / 2;
+    padding-bottom: $grid-gutter-width / 2;
+    margin-left: $grid-gutter-width / -2;
+    margin-top: $grid-gutter-width / 2;
+    margin-bottom: $grid-gutter-width / 2;
+
+    &.editing {
+      background-color: #f5f5f5;
+    }
+
+    .save-or-cancel {
+      margin-bottom: 0;
+    }
+  }
+
+  .revisions-container {
+    @include media-breakpoint-down(md) {
+      border-top: solid 4px $gray-lighter;
+      padding-top: 1.5rem;
+    }
+
+    .create-new-revision {
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+
+    .revisions {
+      display: table;
+      padding-left: 0;
+
+      > li {
+        display: table-row;
+
+        .activate, .revision {
+          display: table-cell;
+          padding-bottom: 0.75rem;
+        }
+
+        .revision {
+          padding-left: 0.75rem;
+
+          .actions {
+            // font-size: $font-size-sm;
+          }
+
+          .title {
+            margin-right: 0.5rem;
+            font-size: $font-size-larger;
+          }
+
+          .info {
+            @extend .help-text;
+          }
+        }
+      }
+    }
+  }
+
+  .child-nodes-container {
+    border-left: solid 4px $gray-lighter;
+    padding-left: 2rem;
+
+    @include media-breakpoint-down(md) {
+      border-left: none;
+      padding-left: 0;
+      border-top: solid 4px $gray-lighter;
+      padding-top: 1.5rem;
+    }
+
+    .add-new-child {
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+
+    .child-nodes {
+      list-style-type: none;
+      padding: 0;
+      font-size: $font-size-larger;
+
+      > .child-node {
+        border: 1px dashed $gray-light;
+        padding: 0.5rem 1rem;
+        margin-bottom: .5rem;
+        background-color: white;
+        cursor: move;
+
+        &.dragging {
+          opacity: 0;
+        }
+      }
+    }
+  }
+}
