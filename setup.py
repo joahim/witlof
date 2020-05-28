@@ -10,7 +10,7 @@ setup(
     packages=['witlof'],
     install_requires=[
         'Django>=1.9',
-        'psycopg2>=2.6.0',
+        'psycopg2-binary>=2.8.5',
         'python-magic>=0.4.0',
         'beautifulsoup4>=4',
         'Pillow>=3',
